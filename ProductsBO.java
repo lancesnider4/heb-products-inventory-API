@@ -39,7 +39,7 @@ public class ProductsBO
 		return product;
 	}
 
-	//Retrieve all product department from DAO call
+	//Retrieve product department from DAO call
 	public static List<ProductsDetailRO> getProductDepartment(String department) throws ProductsSystemException 
 	{	
 		try
@@ -53,7 +53,7 @@ public class ProductsBO
 		return product;
 	}
 
-	//Retrieve all product ID from DAO call
+	//Retrieve product ID from DAO call
 	public static List<ProductsDetailRO> getProductId(String id) throws ProductsSystemException
 	{
 		try
