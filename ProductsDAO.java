@@ -21,16 +21,6 @@ public class ProductsDAO
 	private final String departmentClause = " WHERE DEPARTMENT = ?";
 	private final String descriptionClause = " WHERE DESCRIPTION = ?";
 	private final String idClause = " WHERE ID = ?";
-
-	//Retrieve all product details
-	public List<ProductsDetailRO> getProductDetails()
-	{
-		final String METHOD_NAME = "getProductDetails";
-		
-		List <ProductsDetailRO> allProductDetails = retrieveAndMapProducts(METHOD_NAME, sql);
-		
-		return allProductDetails;
-	}
 	
 	//Retrieve product description
 	public List<ProductsDetailRO> getProductDescription(String description)
@@ -60,49 +50,6 @@ public class ProductsDAO
 		List <ProductsDetailRO> idtProductDetails = retrieveAndMapProductDetails(METHOD_NAME, sql + idClause, id);
 		
 		return idtProductDetails;
-	}
-	
-	private List<ProductsDetailRO> retrieveAndMapProducts(String METHOD_NAME, String sql) 
-	{
-		List <ProductsDetailRO> products = new ArrayList<ProductsDetailRO>();
-
-		try 
-		{
-			//Setup Driver and connecting string details
-			Class.forName("com.mysql.jdbc.Driver");
-			Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/dheb", "heb_admin", "heb1234");
-			
-			//Setup prepared statement and result set
-			PreparedStatement statement = connection.prepareStatement(sql);
-			ResultSet resultSet = statement.executeQuery();
-			
-			//Iterate through all results returned from query and set the values retrieved from the Inventory table accordingly
-			while(resultSet.next()) 
-			{
-				ProductsDetailRO product = new ProductsDetailRO();
-				
-				product.setId(resultSet.getString("id"));
-				product.setDescription(resultSet.getString("description"));
-				product.setLastSold(resultSet.getString("lastSold"));
-				product.setShelfLife(resultSet.getString("shelfLife"));
-				product.setDepartment(resultSet.getString("department"));
-				product.setPrice(resultSet.getString("price"));
-				product.setUnit(resultSet.getString("unit"));
-				product.setxFor(resultSet.getString("xFor"));
-				product.setCost(resultSet.getString("cost"));
-				
-				//Add each row to the instantiated list (ProductsDetailRO)
-				products.add(product);
-			}	
-		} 
-		catch (ClassNotFoundException | SQLException sqlException) 
-		{
-			String sqlExceptionName = sqlException.getClass().getSimpleName();
-			String sqlErrorMessage = "Caught " + sqlExceptionName + " in " + METHOD_NAME + ": unable to retrieve Product Details data.";
-			LOGGER.log(Level.SEVERE, sqlErrorMessage, sqlException);
-		}
-		
-		return products;	
 	}
 	
 	private List<ProductsDetailRO> retrieveAndMapProductDetails(String METHOD_NAME, String sql, String productDetail) 

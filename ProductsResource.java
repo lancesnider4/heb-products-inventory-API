@@ -25,23 +25,6 @@ public class ProductsResource
 	public List<ProductsDetailRO> productsList;
 
 	@GET
-	@Produces(MediaType.APPLICATION_JSON)
-	public Response getProductDetails() 
-	{
-		try 
-		{
-			productsList = ProductsBO.getProducts();
-			
-		} 
-		catch (ProductsSystemException exception) 
-		{
-			return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
-		}
-		
-		return Response.status(Response.Status.OK).entity(productsList).build();
-	}
-
-	@GET
 	@Path("/descriptions/{description}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getProductDescriptions(@PathParam("description") String description) 

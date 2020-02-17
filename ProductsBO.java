@@ -12,18 +12,12 @@ public class ProductsBO
 	static ProductsDAO productsDao = new ProductsDAO();
 	
 	//Retrieve all products from DAO call
-	public static List<ProductsDetailRO> getProducts() throws ProductsSystemException
-	{	
-		try
-		{
-			product = productsDao.getProductDetails();
-		}
-		catch (Exception exception)
-		{
-			throw new ProductsSystemException(exception.getMessage());
-		}
-		return product;
-	}
+	/*
+	 * public static List<ProductsDetailRO> getProducts() throws
+	 * ProductsSystemException { try { product = productsDao.getProductDetails(); }
+	 * catch (Exception exception) { throw new
+	 * ProductsSystemException(exception.getMessage()); } return product; }
+	 */
 
 	//Retrieve product description from DAO call
 	public static List<ProductsDetailRO> getProductDescription(String description) throws ProductsSystemException 
